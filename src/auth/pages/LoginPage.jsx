@@ -9,9 +9,15 @@ import {
   Typography,
 } from '@mui/material';
 
+import { useForm } from '../../hooks/useForm';
 import { AuthLayout } from '../layout/AuthLayout';
 
 export const LoginPage = () => {
+const {formState, onInputChange, onResetForm} = useForm({
+  email: 'ejemplo@gmail.com',
+  contraseña: '',
+})
+
   return (
     <AuthLayout title='Login'>
         <form>
