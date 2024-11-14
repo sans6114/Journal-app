@@ -18,14 +18,25 @@ export const authSlice = createSlice({
         errorMessage: null,
     },
     reducers: {
-        login: (state, action) => {
-
+        login: (state, {payload}) => {
+            state.status = status.authorized
+            state.uid = payload.uid
+            state.email = payload.email
+            state.displayName = payload.displayName
+            state.photoURL = payload.photoURL
+            state.errorMessage = null
         },
-        logout: (state, action) => {
-
+        logout: (state, {payload}) => {
+            state.status = status.unauthorized
+            state.uid = null
+            state.email = null
+            state.displayName = null
+            state.photoURL = null
+            state.errorMessage = payload.errorMessage 
         },
         chekingCredentials: (state) => {
             // aqui defino lo que me servira para manejar la logica mientras no se cual es el estado de mi auth
+            state.status = status.checking
         },
     }
 });
