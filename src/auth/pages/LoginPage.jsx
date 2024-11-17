@@ -8,6 +8,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 import { Google } from '@mui/icons-material';
 import {
+  Alert,
   Button,
   Grid2,
   Link,
@@ -17,29 +18,29 @@ import {
 
 import { useForm } from '../../hooks/useForm';
 import {
-  checkingAuth,
-  checkingAuthGoogle,
+  loginEmail,
+  registerAuthGoogle,
 } from '../../store/auth';
 import { AuthLayout } from '../layout/AuthLayout';
 
 export const LoginPage = () => {
-  const {status} = useSelector(state => state.auth)
+  const { status, errorMessage } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const { email, contraseña, onInputChange, onResetForm } = useForm({
     email: '',
     contraseña: '',
   })
-  const isAuth = useMemo(()=> status === 'checking', [status])
+  const isAuth = useMemo(() => status === 'checking', [status])
 
 
   const onSubmit = (e) => {
     e.preventDefault()
-    dispatch(checkingAuth())
+    dispatch(loginEmail({ email, contraseña }))
     onResetForm()
   }
 
   const onGoogleSignIn = () => {
-    dispatch(checkingAuthGoogle())
+    dispatch(registerAuthGoogle())
   }
 
   return (
@@ -72,6 +73,23 @@ export const LoginPage = () => {
               fullWidth
             />
           </Grid2>
+          {/* error on submit  */}
+          <Grid2
+            container
+            spacing={2}
+            size={{ xs: 12 }}
+            sx={{ mb: 1, mt: 1 }}
+          >
+            <Grid2
+              item
+              size={{ xs: 12 }}
+              display={!!errorMessage ? '' : 'none'}
+            >
+              <Alert severity="error">{errorMessage}</Alert>
+            </Grid2>
+
+          </Grid2>
+
           {/* botones */}
           <Grid2
             container

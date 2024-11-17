@@ -1,4 +1,8 @@
-import { signInWithGoogle } from '../../firebase/providers';
+import {
+  loginWithEmail,
+  registerWithEmail,
+  signInWithGoogle,
+} from '../../firebase/providers';
 import {
   chekingCredentials,
   login,
@@ -7,19 +11,42 @@ import {
 
 export const checkingAuth = (email, contraseña) => {
 
-    return (dispatch, getState) => {
+    return (dispatch) => {
         dispatch(chekingCredentials())
     }
 }
 
-export const checkingAuthGoogle = () => {
-
-    return async (dispatch, getState) => {
+export const registerAuthGoogle = () => {
+    //puedo usar de argumentos dispatch y getState
+    return async (dispatch) => {
         dispatch(chekingCredentials())
 
         const result = await signInWithGoogle()
         if (!result.ok) return dispatch(logout(result.errorMessage))
-console.log(result.photoURL)
+        dispatch(login(result))
+    }
+}
+
+
+export const registerUser = ({ displayName, email, contraseña }) => {
+    return async (dispatch) => {
+
+        dispatch(chekingCredentials())
+
+        const { ok, uid, errorMessage, photoURL } = await registerWithEmail({ displayName, email, contraseña })
+        if (!ok) return dispatch(logout({ errorMessage }))
+
+        dispatch(login({ uid, email, displayName, photoURL }))
+    }
+}
+
+export const loginEmail = ({email, contraseña}) => {
+    return async(dispatch) => {
+        dispatch(chekingCredentials())
+
+        const result = await loginWithEmail({email, contraseña})
+        console.log(result.errorMessage)
+        if(!result.ok) return dispatch(logout(result))
         dispatch(login(result))
     }
 }
