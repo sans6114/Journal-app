@@ -10,7 +10,7 @@ const status = {
 export const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        status: status.unauthorized,//cuales son los estados para mi auth ?
+        status: status.checking,//cuales son los estados para mi auth ?
         uid: null,
         email: null,
         displayName: null,
