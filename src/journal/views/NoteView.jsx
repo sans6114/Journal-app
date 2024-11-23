@@ -10,7 +10,9 @@ import { ImageGallery } from '../components';
 
 export const NoteView = () => {
     return (
-        <Grid2 container direction='column'>
+        <Grid2
+        className='animate__animated animate__fadeIn animate__faster'
+        container direction='column'>
             {/* contenedor 1 */}
             <Grid2
                 container

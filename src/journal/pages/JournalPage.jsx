@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+
 import { AddOutlined } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 
@@ -5,8 +7,11 @@ import { JournalLayout } from '../layouts/JournalLayout';
 import { NoteView } from '../views';
 
 export const JournalPage = () => {
+
+const {displayName} = useSelector(state => state.auth)
+
   return (
-    <JournalLayout title='JournalPage'>
+    <JournalLayout title={displayName}>
       {/* <NothingSelectedView /> */}
        <NoteView /> 
       <IconButton

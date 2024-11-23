@@ -57,7 +57,7 @@ export const RegisterPage = () => {
 
   return (
     <AuthLayout title="Register">
-      <form onSubmit={onSubmitForm}>
+      <form className='animate__animated animate__fadeIn animate__faster' onSubmit={onSubmitForm}>
         <Typography variant='h5' sx={{ mb: 4 }}>{isFormValid ? 'formulario valido' : 'formulario invalido'}</Typography>
         <Grid2
           spacing={2}

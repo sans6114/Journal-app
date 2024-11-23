@@ -32,7 +32,7 @@ export const authSlice = createSlice({
             state.email = null
             state.displayName = null
             state.photoURL = null
-            state.errorMessage = payload.errorMessage 
+            state.errorMessage = payload?.errorMessage || null 
         },
         chekingCredentials: (state) => {
             // aqui defino lo que me servira para manejar la logica mientras no se cual es el estado de mi auth

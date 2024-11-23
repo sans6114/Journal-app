@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -105,12 +107,14 @@ const journals = [
 
 
 export const Sidebar = ({ open, handleDrawerClose }) => {
+
+    const {displayName} = useSelector(state => state.auth)
     const theme = useTheme();
 
     return (
         <Drawer variant="permanent" open={open}>
             <DrawerHeader>
-                <Typography variant='h6'>Santiago Sosa</Typography>
+                <Typography variant='h6'>{displayName}</Typography>
                 <IconButton onClick={handleDrawerClose}>
                     {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                 </IconButton>

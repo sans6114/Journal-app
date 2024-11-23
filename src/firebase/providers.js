@@ -58,7 +58,7 @@ export const registerWithEmail = async ({ displayName, email, contraseña }) => 
 export const loginWithEmail = async ({ email, contraseña }) => {
     try {
         const res = await signInWithEmailAndPassword(journalAuth, email, contraseña)
-        const {uid, displayName, photoURL} = res.user
+        const { uid, displayName, photoURL } = res.user
         return {
             ok: true,
             uid, displayName, photoURL
@@ -74,3 +74,7 @@ export const loginWithEmail = async ({ email, contraseña }) => {
     }
 }
 
+
+export const logOutFirebase = async () => {
+    return await journalAuth.signOut()
+}

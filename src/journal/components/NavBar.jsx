@@ -1,12 +1,17 @@
+import { useDispatch } from 'react-redux';
+
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import MenuIcon from '@mui/icons-material/Menu';
 import {
+  Button,
   IconButton,
   Toolbar,
   Typography,
 } from '@mui/material';
 import MuiAppBar from '@mui/material/AppBar';
 import { styled } from '@mui/material/styles';
+
+import { startLogOut } from '../../store/auth';
 
 const drawerWidth = 250;
 
@@ -29,6 +34,10 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export const Navbar = ({ open, handleDrawerOpen, title }) => {
+const dispatch = useDispatch()
+  const logOut = () => {
+    dispatch(startLogOut())
+  }
   return (
     <AppBar position="fixed" open={open}>
       <Toolbar>
@@ -44,7 +53,9 @@ export const Navbar = ({ open, handleDrawerOpen, title }) => {
         <Typography variant="h6" noWrap component="div">
           {title}
         </Typography>
-        <ExitToAppIcon sx={{ml: 'auto'}} color='error'/>
+        <Button sx={{ml: 'auto', bgcolor: 'ButtonShadow'}} variant='outlined' endIcon={<ExitToAppIcon  color='error'/>} onClick={logOut} >
+        Logout
+        </Button>
       </Toolbar>
     
     </AppBar>

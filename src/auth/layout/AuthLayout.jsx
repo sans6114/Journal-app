@@ -1,3 +1,5 @@
+import 'animate.css';
+
 import {
   Grid2,
   Typography,
@@ -6,6 +8,7 @@ import {
 export const AuthLayout = ({children, title = ''}) => {
     return (
         <Grid2
+        
             container
             direction="column"
             alignItems="center"
