@@ -1,20 +1,30 @@
-import { useSelector } from 'react-redux';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 
 import { AddOutlined } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 
+import { createNewNoteThunk } from '../../store/journal';
 import { JournalLayout } from '../layouts/JournalLayout';
 import { NoteView } from '../views';
 
 export const JournalPage = () => {
+  const dispatch = useDispatch()
+  const { displayName } = useSelector(state => state.auth)
 
-const {displayName} = useSelector(state => state.auth)
+  const onNewEmptyNote = () => {
+    dispatch(createNewNoteThunk())
+  }
+
 
   return (
     <JournalLayout title={displayName}>
       {/* <NothingSelectedView /> */}
-       <NoteView /> 
+      <NoteView />
       <IconButton
+        onClick={onNewEmptyNote}
         size='large'
         sx={{
           color: 'white',

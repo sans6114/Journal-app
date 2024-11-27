@@ -18,7 +18,6 @@ export const useAuthCheck = () => {
 
     useEffect(() => {
         onAuthStateChanged(journalAuth, async (user) => {
-            console.log(user)
             if (!user ) return dispatch(logout())
             dispatch(login(user))
         })
