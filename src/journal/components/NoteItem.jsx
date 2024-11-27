@@ -11,10 +11,9 @@ import {
 
 import { setActiveNote } from '../../store/journal';
 
-export const NoteItem = ({ note, open }) => {
+export const NoteItem = ({ title, body, date, id, imageUrls = [],open }) => {
      
     const dispatch = useDispatch()
-    const { title, body, date } = note
 
     const newTitle = useMemo(() => {
         return title.length > 17
@@ -29,7 +28,7 @@ export const NoteItem = ({ note, open }) => {
     }, [body])
 
     const onPutActiveNote = () => {
-        dispatch(setActiveNote(note))
+        dispatch(setActiveNote({title, id, date, body, imageUrls}))
     }
 
     return (

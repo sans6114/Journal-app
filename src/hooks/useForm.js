@@ -12,7 +12,10 @@ export const useForm = (initialForm = {}, formValidation = {}) => {
     useEffect(() => {
         createValidations()
     }, [formState])
-
+    //si cambia mi initialForm:
+    useEffect(() => {
+    setFormState(initialForm)
+    }, [initialForm])
     //isFormValid con useMemo ya que evitar recalculo sin que cambien las formValidations
     const isFormValid = useMemo( () => {
         for (const campValid of Object.keys(formValidations)) {

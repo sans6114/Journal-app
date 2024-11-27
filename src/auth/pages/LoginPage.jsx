@@ -23,13 +23,15 @@ import {
 } from '../../store/auth';
 import { AuthLayout } from '../layout/AuthLayout';
 
+const formData = {
+    email: '',
+    contraseña: '',
+}
+
 export const LoginPage = () => {
   const { status, errorMessage } = useSelector(state => state.auth)
   const dispatch = useDispatch()
-  const { email, contraseña, onInputChange, onResetForm } = useForm({
-    email: '',
-    contraseña: '',
-  })
+  const { email, contraseña, onInputChange, onResetForm } = useForm(formData)
   const isAuth = useMemo(() => status === 'checking', [status])
 
 

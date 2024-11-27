@@ -11,6 +11,8 @@ import {
   savingNewNote,
   setActiveNote,
   setNotes,
+  setSaving,
+  updateNote,
 } from './journalSlice';
 
 export const createNewNoteThunk = () => {
@@ -42,5 +44,20 @@ export const getNoteFromStorageThunk = () => {
         if (!uid) throw new Error('el uid del usuario no esta establecido')
         const notes = await loadNotes(uid)
         dispatch(setNotes(notes))
+    }
+}
+
+export const updateNoteThunk = () => {
+    return async (dispatch, getState) => {
+        dispatch(setSaving())
+        const { uid } = getState().auth
+        const { active: note } = getState().journal
+
+        const noteToFirestore = { ...note }
+        delete noteToFirestore.id
+
+        const docRef = doc(journalDB, `${uid}/journal/notes/${note.id}`)
+        await setDoc(docRef, noteToFirestore, { merge: true })
+        dispatch(updateNote(note.id,{...noteToFirestore}))
     }
 }

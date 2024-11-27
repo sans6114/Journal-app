@@ -83,7 +83,7 @@ export const Sidebar = ({ open, handleDrawerClose }) => {
             <Divider />
             <List>
                 {notes.map(journalNote => (
-                    <NoteItem note={journalNote} open={open} key={journalNote.id}/>
+                    <NoteItem {...journalNote} open={open} key={journalNote.id}/>
                 ))}
             </List>
         </Drawer>

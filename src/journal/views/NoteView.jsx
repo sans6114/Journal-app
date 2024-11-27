@@ -1,5 +1,13 @@
+import {
+  useEffect,
+  useMemo,
+} from 'react';
+
 import moment from 'moment';
-import { useSelector } from 'react-redux';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 
 import { SaveAltOutlined } from '@mui/icons-material';
 import {
@@ -9,12 +17,28 @@ import {
   Typography,
 } from '@mui/material';
 
+import { useForm } from '../../hooks/useForm';
+import {
+  setActiveNote,
+  updateNoteThunk,
+} from '../../store/journal';
 import { ImageGallery } from '../components';
 
 export const NoteView = () => {
-    const { active} = useSelector(state => state.journal)
-    console.log(active)
-    const formattedDate = moment(active.date).format('DD/MM/YYYY HH:mm')
+    const dispatch = useDispatch()
+    const { active: actualNote } = useSelector(state => state.journal)
+    const { title, body, date, formState, onInputChange } = useForm(actualNote)
+    //formatear mi fecha de creacion de la nota
+    const formattedDate = useMemo(() => moment(date).format('MMMM Do YYYY, h:mm:ss a'), [date])
+    //actualizar mi nota en el state
+    useEffect(() => {
+        dispatch(setActiveNote(formState))
+    }, [formState])
+
+    const onSaveNote = () => {
+        dispatch(updateNoteThunk())
+    }
+
 
     return (
         <Grid2
@@ -33,7 +57,9 @@ export const NoteView = () => {
                 </Grid2>
                 <Grid2 item>
 
-                    <Button>
+                    <Button
+                    onClick={onSaveNote}
+                    >
                         <SaveAltOutlined />
                         <Typography sx={{ display: { xs: 'none', md: 'block' }, ml: 1 }} fontSize={15}>Guardar</Typography>
                     </Button>
@@ -42,8 +68,8 @@ export const NoteView = () => {
             </Grid2>
             {/* contenedor 2 */}
             <Grid2 sx={{ mt: 3 }} container direction='column' alignContent='center' justifyContent='center'>
-                <TextField label='título' variant='filled' type='text' placeholder='Nota del dia' fullWidth sx={{ border: 'none', mb: 2 }} />
-                <TextField label='descripción' multiline variant='filled' type='text' placeholder='Descrición de tu nota' fullWidth sx={{ border: 'none', mb: 2 }} minRows={5} />
+                <TextField name='title' value={title} onChange={onInputChange} label='título' variant='filled' type='text' placeholder='Nota del dia' fullWidth sx={{ border: 'none', mb: 2 }} />
+                <TextField name='body' value={body} onChange={onInputChange} label='descripción' multiline variant='filled' type='text' placeholder='Descrición de tu nota' fullWidth sx={{ border: 'none', mb: 2 }} minRows={5} />
             </Grid2>
             {/* componente gallery  */}
             <ImageGallery />
