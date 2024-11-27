@@ -8,9 +8,13 @@ import { IconButton } from '@mui/material';
 
 import { createNewNoteThunk } from '../../store/journal';
 import { JournalLayout } from '../layouts/JournalLayout';
-import { NoteView } from '../views';
+import {
+  NoteView,
+  NothingSelectedView,
+} from '../views';
 
 export const JournalPage = () => {
+  const { isSaving, active: hasNote } = useSelector(state => state.journal)
   const dispatch = useDispatch()
   const { displayName } = useSelector(state => state.auth)
 
@@ -21,9 +25,13 @@ export const JournalPage = () => {
 
   return (
     <JournalLayout title={displayName}>
-      {/* <NothingSelectedView /> */}
-      <NoteView />
+      {
+        (!!hasNote)
+          ? <NoteView />
+          : <NothingSelectedView />
+      }
       <IconButton
+        disabled={isSaving}
         onClick={onNewEmptyNote}
         size='large'
         sx={{

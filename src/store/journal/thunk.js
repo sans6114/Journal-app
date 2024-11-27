@@ -5,10 +5,19 @@ import {
 } from 'firebase/firestore/lite';
 
 import { journalDB } from '../../firebase';
-import { addNewEmptyNote } from './journalSlice';
+import { loadNotes } from '../../helpers';
+import {
+  addNewEmptyNote,
+  savingNewNote,
+  setActiveNote,
+  setNotes,
+} from './journalSlice';
 
 export const createNewNoteThunk = () => {
     return async (dispatch, getState) => {
+
+        dispatch(savingNewNote())
+
         //obtengo el uid de mi state
         const { uid } = getState().auth
         const newNote = {
@@ -21,7 +30,17 @@ export const createNewNoteThunk = () => {
         await setDoc(newDoc, newNote)
 
         newNote.id = newDoc.id
-        console.log(newNote)
+
         dispatch(addNewEmptyNote(newNote))
+        dispatch(setActiveNote(newNote))
+    }
+}
+
+export const getNoteFromStorageThunk = () => {
+    return async (dispatch, getState) => {
+        const { uid } = getState().auth
+        if (!uid) throw new Error('el uid del usuario no esta establecido')
+        const notes = await loadNotes(uid)
+        dispatch(setNotes(notes))
     }
 }

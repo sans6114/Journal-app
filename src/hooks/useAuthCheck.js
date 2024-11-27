@@ -11,16 +11,18 @@ import {
   login,
   logout,
 } from '../store/auth';
+import { getNoteFromStorageThunk } from '../store/journal';
 
 export const useAuthCheck = () => {
-    const { status } = useSelector(state => state.auth)
-    const dispatch = useDispatch()
+  const { status } = useSelector(state => state.auth)
+  const dispatch = useDispatch()
 
-    useEffect(() => {
-        onAuthStateChanged(journalAuth, async (user) => {
-            if (!user ) return dispatch(logout())
-            dispatch(login(user))
-        })
-    }, [])
-    return status
+  useEffect(() => {
+    onAuthStateChanged(journalAuth, async (user) => {
+      if (!user) return dispatch(logout())
+      dispatch(login(user))
+      dispatch(getNoteFromStorageThunk())
+    })
+  }, [])
+  return status
 }

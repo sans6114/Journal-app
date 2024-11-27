@@ -1,3 +1,6 @@
+import moment from 'moment';
+import { useSelector } from 'react-redux';
+
 import { SaveAltOutlined } from '@mui/icons-material';
 import {
   Button,
@@ -9,10 +12,14 @@ import {
 import { ImageGallery } from '../components';
 
 export const NoteView = () => {
+    const { active} = useSelector(state => state.journal)
+    console.log(active)
+    const formattedDate = moment(active.date).format('DD/MM/YYYY HH:mm')
+
     return (
         <Grid2
-        className='animate__animated animate__fadeIn animate__faster'
-        container direction='column'>
+            className='animate__animated animate__fadeIn animate__faster'
+            container direction='column'>
             {/* contenedor 1 */}
             <Grid2
                 container
@@ -22,7 +29,7 @@ export const NoteView = () => {
 
             >
                 <Grid2 item>
-                    <Typography fontSize={{ xs: 20, md: 39 }} fontWeight='light'>6 de Noviembre 2024</Typography>
+                    <Typography fontSize={{ xs: 20, md: 39 }} fontWeight='light'>{formattedDate}</Typography>
                 </Grid2>
                 <Grid2 item>
 
@@ -34,12 +41,12 @@ export const NoteView = () => {
                 {/* content of my note */}
             </Grid2>
             {/* contenedor 2 */}
-            <Grid2 sx={{ mt: 3 }} continer direction='column' alignContent='center' justifyContent='center'>
-                <TextField label='título' variant='filled' type='text' placeholder='Nota del dia' fullWidth sx={{border: 'none', mb: 2}} />
-                <TextField label='descripción' multiline variant='filled' type='text' placeholder='Descrición de tu nota' fullWidth sx={{border: 'none', mb: 2}} minRows={5} />
+            <Grid2 sx={{ mt: 3 }} container direction='column' alignContent='center' justifyContent='center'>
+                <TextField label='título' variant='filled' type='text' placeholder='Nota del dia' fullWidth sx={{ border: 'none', mb: 2 }} />
+                <TextField label='descripción' multiline variant='filled' type='text' placeholder='Descrición de tu nota' fullWidth sx={{ border: 'none', mb: 2 }} minRows={5} />
             </Grid2>
             {/* componente gallery  */}
-            <ImageGallery/>
+            <ImageGallery />
         </Grid2>
 
     )
