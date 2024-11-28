@@ -20,7 +20,8 @@ export const useAuthCheck = () => {
   useEffect(() => {
     onAuthStateChanged(journalAuth, async (user) => {
       if (!user) return dispatch(logout())
-      dispatch(login(user))
+        const {uid, email, displayName, photoURL} = user
+      dispatch(login({uid, email, displayName, photoURL}))
       dispatch(getNoteFromStorageThunk())
     })
   }, [])
