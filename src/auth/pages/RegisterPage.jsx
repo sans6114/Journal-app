@@ -63,7 +63,7 @@ export const RegisterPage = () => {
           spacing={2}
           container>
           {/* nombre */}
-          <Grid2 item size={{ xs: 12 }}>
+          <Grid2  size={{ xs: 12 }}>
             <TextField
               label='Nombre'
               value={displayName}
@@ -77,7 +77,7 @@ export const RegisterPage = () => {
             />
           </Grid2>
           {/* correo */}
-          <Grid2 item size={{ xs: 12 }}>
+          <Grid2  size={{ xs: 12 }}>
             <TextField
               label='Correo'
               value={email}
@@ -91,7 +91,7 @@ export const RegisterPage = () => {
             />
           </Grid2>
           {/* contraseña */}
-          <Grid2 item size={{ xs: 12 }}>
+          <Grid2  size={{ xs: 12 }}>
             <TextField
               label='contraseña'
               type='password'
@@ -112,7 +112,7 @@ export const RegisterPage = () => {
             sx={{ mb: 2, mt: 1 }}
           >
             <Grid2
-              item
+              
               size={{ xs: 12 }}
               display={!!errorMessage ? '' : 'none'}
             >

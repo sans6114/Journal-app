@@ -16,14 +16,13 @@ export const NothingSelectedView = () => {
             sx={{ minHeight: 'calc(100vh - 110px)', backgroundColor: 'primary.main', borderRadius: 5, textAlign: 'center' }}
         >
             <Grid2
-                item
+                
                 size={{ xs: 12 }}
             >
                 <StarOutline sx={{ fontSize: 100, color: 'white' }} />
             </Grid2>
 
             <Grid2
-                item
                 size={{ xs: 12 }}
             >
                 <Typography color='white' variant='h5'>Crea una entrada</Typography>

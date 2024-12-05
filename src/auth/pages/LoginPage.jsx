@@ -52,7 +52,7 @@ export const LoginPage = () => {
           spacing={2}
           container>
           {/* correo */}
-          <Grid2 item size={{ xs: 12 }}>
+          <Grid2 size={{ xs: 12 }}>
             <TextField
               label='Correo'
               name='email'
@@ -64,7 +64,7 @@ export const LoginPage = () => {
             />
           </Grid2>
           {/* contraseña */}
-          <Grid2 item size={{ xs: 12 }}>
+          <Grid2  size={{ xs: 12 }}>
             <TextField
               label='Contraseña'
               name='contraseña'
@@ -83,7 +83,6 @@ export const LoginPage = () => {
             sx={{ mb: 1, mt: 1 }}
           >
             <Grid2
-              item
               size={{ xs: 12 }}
               display={!!errorMessage ? '' : 'none'}
             >
@@ -99,12 +98,12 @@ export const LoginPage = () => {
             size={12}
             sx={{ mb: 2, mt: 2 }}
           >
-            <Grid2 item size={{ xs: 12, sm: 6 }}>
+            <Grid2 size={{ xs: 12, sm: 6 }}>
               <Button disabled={isAuth} type='submit' variant="contained" fullWidth>
                 Login
               </Button>
             </Grid2>
-            <Grid2 item size={{ xs: 12, sm: 6 }}>
+            <Grid2 size={{ xs: 12, sm: 6 }}>
               <Button disabled={isAuth} onClick={onGoogleSignIn} variant="contained" fullWidth>
                 <Google />
                 <Typography sx={{ ml: 1 }}>Google</Typography>

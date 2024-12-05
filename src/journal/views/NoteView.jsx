@@ -83,10 +83,10 @@ export const NoteView = () => {
                 direction='row'
                 justifyContent='space-between'
             >
-                <Grid2 item>
+                <Grid2>
                     <Typography fontSize={{ xs: 20, md: 39 }} fontWeight='light'>{formattedDate}</Typography>
                 </Grid2>
-                <Grid2 item>
+                <Grid2 >
                     <input
                         style={{ display: 'none' }}
                         type='file'
